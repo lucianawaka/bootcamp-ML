@@ -13,7 +13,13 @@ Modelo = joblib.load('Modelo_Linear_v100.pkl')
 # Rotas
 @Aplicativo.route('/API/<Score>', methods=['GET'])
 def Pagina_api( Score ):
-    return 'Pagina está on! Lulu está On! Bora caminhar!!!'
+    
+    Inpute_para_modelo = float(Score)
+    # Previsao
+    Previsao = Modelo.predict( [[ Inpute_para_modelo]] )
+    return f'O Score de risco é: { Previsao[0] }'
+
+    
 
 @Aplicativo.route('/')
 def Pagina_Inicial():
