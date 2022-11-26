@@ -11,8 +11,8 @@ Modelo = joblib.load('Modelo_Linear_v100.pkl')
 
 
 # Rotas
-@Aplicativo.route('/API/')
-def Pagina_api():
+@Aplicativo.route('/API/<Score>', methods=['GET'])
+def Pagina_api( Score ):
     return 'Pagina está on! Lulu está On! Bora caminhar!!!'
 
 @Aplicativo.route('/')
