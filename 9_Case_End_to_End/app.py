@@ -14,12 +14,28 @@ Modelo = joblib.load('Modelo_Linear_v100.pkl')
 @Aplicativo.route('/API/<Score>', methods=['GET'])
 def Pagina_api( Score ):
     
-    Inpute_para_modelo = float(Score)
-    # Previsao
-    Previsao = Modelo.predict( [[ Inpute_para_modelo]] )
-    return f'O Score de risco é: { Previsao[0] }'
-
+    # Entrada
+    entrada = datetime.now()
     
+    Inpute_para_modelo = Score
+    # Previsao
+    try:
+        Previsao = Modelo.predict( [[ float(Inpute_para_modelo) ]] )
+        
+        # Término
+        saida = datetime.now()
+        
+        Dicionario ={
+            'Parametro_cliente' : str(Inpute_para_modelo),
+            'Risco_credito': str( round( Previsao[0], 2)),
+            'Data_entrada': str(entrada),
+            'Data_saida':str(saida),
+            'Tempo_processamento': str(saida - entrada)
+        }
+
+        return Dicionario
+    except:
+        return f'Muitas requisições'
 
 @Aplicativo.route('/')
 def Pagina_Inicial():
