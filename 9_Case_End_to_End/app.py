@@ -17,7 +17,7 @@ def Pagina_api():
 
 @Aplicativo.route('/')
 def Pagina_Inicial():
-    return 'Rota inicial vazia, vá para /API'
+    return 'Rota inicial sem uso, vá para /API'
 
 # Lingando o Aplicativo
 if __name__ == '__main__':
